@@ -141,6 +141,7 @@ function gombkatt(event) {
         if (turncounter == 9 && !win) {
           removeOnclick();
           changestuff("DÖNTETLEN");
+          return;
         }
 
         currentplayer = 2;
@@ -162,6 +163,7 @@ function gombkatt(event) {
         if (turncounter == 9 && !win) {
           removeOnclick();
           changestuff("DÖNTETLEN");
+          return;
         }
 
         currentplayer = 1;
