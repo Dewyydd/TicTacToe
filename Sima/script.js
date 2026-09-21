@@ -114,7 +114,7 @@ function checkwin(player) {
     if (oszlop(plyr2) || sor(plyr2) || keresztbe(plyr2)) {
       win = true;
       removeOnclick();
-      return true;
+      return true;;
     }
   }
 }

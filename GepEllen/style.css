@@ -6,6 +6,8 @@ body {
   min-height: 100vh;
   padding: 0;
   margin: 0;
+  background-color: #335C67;
+  color: white;
 }
 
 .tictactoecontainer {
@@ -18,7 +20,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(230, 228, 228);
 }
 
 .tictactoecontainer > div:nth-child(1),
@@ -56,9 +57,9 @@ body {
 }
 
 .green {
-  background-color: greenyellow;
+  background-color: #04E762;
 }
 
 .red {
-  background-color: red;
+  background-color: #AC3931;
 }
