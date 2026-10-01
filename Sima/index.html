@@ -7,6 +7,20 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div class="kiirok">
+      <div id="xKiiro" class="kovetkezik">
+        <h2 class="green">X</h2>
+        <p>0</p>
+      </div>
+      <div id="dontetlenKiiro">
+        <h2>/</h2>
+        <p>0</p>
+      </div>
+      <div id="oKiiro">
+        <h2 class="red">O</h2>
+        <p>0</p>
+      </div>
+    </div>
     <div class="tictactoecontainer">
       <div>
         <button id="00"></button>
@@ -36,7 +50,7 @@
         <button id="22"></button>
       </div>
     </div>
-    <h1 id="kiiro">JÁTÉKOS [1] KEZD</h1>
+    <button id="reset" onclick="reset()">ÚJ JÁTÉK</button>
   </body>
   <script src="script.js"></script>
 </html>

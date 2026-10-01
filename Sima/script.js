@@ -4,7 +4,15 @@ let matrix = [
   [false, false, false],
 ];
 
-let kiiro = document.getElementById("kiiro");
+let xKiiro = document.getElementById("xKiiro");
+let dontetlenKiiro = document.getElementById("dontetlenKiiro");
+let oKiiro = document.getElementById("oKiiro");
+
+let resetGomb = document.getElementById("reset");
+
+let xSzamlalo = 0;
+let oSzamlalo = 0;
+let dontetlenSzamlalo = 0;
 
 let plyr1 = [];
 let plyr2 = [];
@@ -14,7 +22,7 @@ let win = false;
 let turncounter = 0;
 
 function removeOnclick() {
-  let btns = document.querySelectorAll("button");
+  let btns = document.querySelectorAll(".tictactoecontainer div button");
   btns.forEach((element) => {
     element.onclick = null;
   });
@@ -106,15 +114,19 @@ function keresztbe(array) {
 function checkwin(player) {
   if (player == 1) {
     if (oszlop(plyr1) || sor(plyr1) || keresztbe(plyr1)) {
+      xSzamlalo++;
       win = true;
       removeOnclick();
+      resetGomb.style.display = "block";
       return true;
     }
   } else if (player == 2) {
     if (oszlop(plyr2) || sor(plyr2) || keresztbe(plyr2)) {
+      oSzamlalo++;
       win = true;
       removeOnclick();
-      return true;;
+      resetGomb.style.display = "block";
+      return true;
     }
   }
 }
@@ -134,18 +146,21 @@ function gombkatt(event) {
       button.innerHTML = "X";
 
       if (checkwin(1)) {
-        changestuff("JÁTÉKOS [1] NYERT");
+        xKiiro.querySelector("p").innerHTML = xSzamlalo;
       } else {
         turncounter++;
 
         if (turncounter == 9 && !win) {
           removeOnclick();
-          changestuff("DÖNTETLEN");
+          dontetlenSzamlalo++;
+          dontetlenKiiro.querySelector("p").innerHTML = dontetlenSzamlalo;
+          resetGomb.style.display = "block";
           return;
         }
 
         currentplayer = 2;
-        changestuff(currentplayer);
+        xKiiro.classList.remove("kovetkezik");
+        oKiiro.classList.add("kovetkezik");
       }
     } else {
       console.log("plyr2: " + event.target.id);
@@ -156,18 +171,18 @@ function gombkatt(event) {
       button.innerHTML = "O";
 
       if (checkwin(2)) {
-        changestuff("JÁTÉKOS [2] NYERT");
+        oKiiro.querySelector("p").innerHTML = oSzamlalo;
       } else {
         turncounter++;
 
         if (turncounter == 9 && !win) {
           removeOnclick();
-          changestuff("DÖNTETLEN");
           return;
         }
 
         currentplayer = 1;
-        changestuff(currentplayer);
+        xKiiro.classList.add("kovetkezik");
+        oKiiro.classList.remove("kovetkezik");
       }
     }
   } else {
@@ -175,21 +190,40 @@ function gombkatt(event) {
   }
 }
 
-function changestuff(input) {
-  if (input == 2) {
-    kiiro.innerHTML = "JÁTÉKOS [2] KÖVETKEZIK";
-  } else if (input == 1) {
-    kiiro.innerHTML = "JÁTÉKOS [1] KÖVETKEZIK";
-  } else {
-    kiiro.innerHTML = input;
-  }
-}
-
 function jatek() {
-  let btns = document.querySelectorAll("button");
+  let btns = document.querySelectorAll(".tictactoecontainer div button");
   btns.forEach((element) => {
     element.onclick = gombkatt;
   });
+}
+
+function reset() {
+  matrix = [
+    [false, false, false],
+    [false, false, false],
+    [false, false, false],
+  ];
+
+  plyr1 = [];
+  plyr2 = [];
+
+  currentplayer = 1;
+  win = false;
+  turncounter = 0;
+
+  let btns = document.querySelectorAll(".tictactoecontainer div button");
+  btns.forEach((element) => {
+    element.innerHTML = "";
+    element.classList.remove("green");
+    element.classList.remove("red");
+  });
+
+  xKiiro.classList.add("kovetkezik");
+  oKiiro.classList.remove("kovetkezik");
+
+  resetGomb.style.display = "none";
+
+  jatek();
 }
 
 jatek();
