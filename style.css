@@ -26,7 +26,7 @@ body > div {
 .vs {
   box-sizing: border-box;
   background-color: #0e1920;
-  width: 50%;
+  width: 55%;
   height: 45%;
   border-radius: 50px;
   display: flex;
@@ -37,7 +37,7 @@ body > div {
 
 h1 {
   color: #fff;
-  font-size: 2rem;
+  font-size: 1.75rem;
   font-weight: bold;
   text-transform: uppercase;
 }
@@ -54,4 +54,14 @@ a {
 .vs:hover {
   transform: scale(1.1);
   transition: all 0.05s ease;
+}
+
+@media screen and (max-width: 1200px) {
+  .vs {
+    width: 80%;
+    height: 75%;
+  }
+  body {
+    flex-direction: column;
+  }
 }
