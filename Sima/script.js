@@ -10,6 +10,10 @@ let oKiiro = document.getElementById("oKiiro");
 
 let resetGomb = document.getElementById("reset");
 
+let winnerButtons = [];
+let winStyle =
+  "background-color: #fbbf24;box-shadow: 0 0 20px 5px #fbbf24;color: #0e1920;";
+
 let xSzamlalo = 0;
 let oSzamlalo = 0;
 let dontetlenSzamlalo = 0;
@@ -43,7 +47,20 @@ function oszlop(array) {
     }
   });
 
-  if (count1 == 3 || count2 == 3 || count3 == 3) {
+  if (count1 == 3) {
+    winnerButtons.push(document.getElementById("00"));
+    winnerButtons.push(document.getElementById("10"));
+    winnerButtons.push(document.getElementById("20"));
+    return true;
+  } else if (count2 == 3) {
+    winnerButtons.push(document.getElementById("01"));
+    winnerButtons.push(document.getElementById("11"));
+    winnerButtons.push(document.getElementById("21"));
+    return true;
+  } else if (count3 == 3) {
+    winnerButtons.push(document.getElementById("02"));
+    winnerButtons.push(document.getElementById("12"));
+    winnerButtons.push(document.getElementById("22"));
     return true;
   } else {
     return false;
@@ -65,7 +82,20 @@ function sor(array) {
     }
   });
 
-  if (count1 == 3 || count2 == 3 || count3 == 3) {
+  if (count1 == 3) {
+    winnerButtons.push(document.getElementById("00"));
+    winnerButtons.push(document.getElementById("01"));
+    winnerButtons.push(document.getElementById("02"));
+    return true;
+  } else if (count2 == 3) {
+    winnerButtons.push(document.getElementById("10"));
+    winnerButtons.push(document.getElementById("11"));
+    winnerButtons.push(document.getElementById("12"));
+    return true;
+  } else if (count3 == 3) {
+    winnerButtons.push(document.getElementById("20"));
+    winnerButtons.push(document.getElementById("21"));
+    winnerButtons.push(document.getElementById("22"));
     return true;
   } else {
     return false;
@@ -87,6 +117,9 @@ function keresztbe(array) {
   });
 
   if (t1 && t2 && t3) {
+    winnerButtons.push(document.getElementById("00"));
+    winnerButtons.push(document.getElementById("11"));
+    winnerButtons.push(document.getElementById("22"));
     return true;
   } else {
     t1 = false;
@@ -104,6 +137,9 @@ function keresztbe(array) {
     });
 
     if (t1 && t2 && t3) {
+      winnerButtons.push(document.getElementById("20"));
+      winnerButtons.push(document.getElementById("11"));
+      winnerButtons.push(document.getElementById("02"));
       return true;
     } else {
       return false;
@@ -118,6 +154,11 @@ function checkwin(player) {
       win = true;
       removeOnclick();
       resetGomb.style.display = "block";
+
+      winnerButtons.forEach((element) => {
+        element.style = winStyle;
+      });
+
       return true;
     }
   } else if (player == 2) {
@@ -126,6 +167,11 @@ function checkwin(player) {
       win = true;
       removeOnclick();
       resetGomb.style.display = "block";
+
+      winnerButtons.forEach((element) => {
+        element.style = winStyle;
+      });
+
       return true;
     }
   }
@@ -204,6 +250,8 @@ function reset() {
     [false, false, false],
   ];
 
+  winnerButtons = [];
+
   plyr1 = [];
   plyr2 = [];
 
@@ -216,6 +264,7 @@ function reset() {
     element.innerHTML = "";
     element.classList.remove("green");
     element.classList.remove("red");
+    element.style = "";
   });
 
   xKiiro.classList.add("kovetkezik");
