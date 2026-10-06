@@ -178,10 +178,85 @@ function checkwin(player) {
   }
 }
 
+function Blokkolas() {
+  let nyero = [
+    ["00", "01", "02"],
+    ["10", "11", "12"],
+    ["20", "21", "22"],
+    ["00", "10", "20"],
+    ["01", "11", "21"],
+    ["02", "12", "22"],
+    ["00", "11", "22"],
+    ["20", "11", "02"],
+  ];
+
+  for (let ny of nyero) {
+    let db = 0;
+    let szabad = null;
+
+    for (let id of ny) {
+      if (plyr1.includes(id)) {
+        db++;
+      } else if (matrix[id[0]][id[1]] == false) {
+        szabad = id;
+      }
+    }
+
+    if (db == 2 && szabad) {
+      return szabad;
+    }
+  }
+  return null;
+}
+
+function Nyeres() {
+  let nyero = [
+    ["00", "01", "02"],
+    ["10", "11", "12"],
+    ["20", "21", "22"],
+    ["00", "10", "20"],
+    ["01", "11", "21"],
+    ["02", "12", "22"],
+    ["00", "11", "22"],
+    ["20", "11", "02"],
+  ];
+
+  for (let ny of nyero) {
+    let db = 0;
+    let szabad = null;
+
+    for (let id of ny) {
+      if (plyr2.includes(id)) {
+        db++;
+      } else if (matrix[id[0]][id[1]] == false) {
+        szabad = id;
+      }
+    }
+
+    if (db == 2 && szabad) {
+      return szabad;
+    }
+  }
+  return null;
+}
+
 function geprobbantinnit() {
+  let blokkolas = Blokkolas();
+  let nyero = Nyeres();
+
   while (true) {
     let random1 = Math.floor(Math.random() * 3);
     let random2 = Math.floor(Math.random() * 3);
+
+    if (blokkolas) {
+      random1 = blokkolas[0];
+      random2 = blokkolas[1];
+    }
+
+    if (nyero) {
+      random1 = nyero[0];
+      random2 = nyero[1];
+    }
 
     if (matrix[random1][random2] == false) {
       matrix[random1][random2] = true;
